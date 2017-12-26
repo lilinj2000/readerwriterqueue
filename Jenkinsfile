@@ -7,12 +7,11 @@ pipeline {
 
 home_3rd=$JENKINS_HOME/3rd/${kernel}
 
-readerwriterqueue_include=${home_3rd}/readerwriterqueue/include/readerwriterqueue
+readerwriterqueue_include=${home_3rd}/readerwriterqueue/include
 
 mkdir -p ${readerwriterqueue_include}
 
-cp -av atomicops.h ${readerwriterqueue_include}
-cp -av readerwriterqueue.h ${readerwriterqueue_include}'''
+cp -av *.h ${readerwriterqueue_include}'''
       }
     }
   }
