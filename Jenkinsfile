@@ -1,18 +1,24 @@
 pipeline {
-  agent any
+  agent {
+    docker {
+      image 'lilinj2000/dev:centos6'
+    }
+  }
+
+  environment {
+    home_3rd = '/var/jenkins_home/dist_pkg/3rd/centos6'
+    home_libs = '/var/jenkins_home/dist_pkg/libs/centos6'
+    home_app = '/var/jenkins_home/dist_pkg/app/centos6'
+  }
+
   stages {
     stage('install') {
       steps {
-        sh '''kernel=`uname -sr | sed --e=\'s/ /\\//\'`
-
-home_3rd=$JENKINS_HOME/3rd/${kernel}
-
-readerwriterqueue_include=${home_3rd}/readerwriterqueue/include/readerwriterqueue
-
-mkdir -p ${readerwriterqueue_include}
-
-cp -av atomicops.h ${readerwriterqueue_include}
-cp -av readerwriterqueue.h ${readerwriterqueue_include}'''
+        sh '''
+readerwriterqueue_install_path=${home_3rd}/readerwriterqueue/include
+mkdir -p ${readerwriterqueue_install_path}
+cp -av *.h ${readerwriterqueue_install_path}
+       	'''
       }
     }
   }
