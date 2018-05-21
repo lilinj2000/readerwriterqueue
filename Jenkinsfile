@@ -22,4 +22,10 @@ cp -av *.h ${readerwriterqueue_install_path}
       }
     }
   }
+  
+  post { 
+    always { 
+      cleanWs()
+     }
+  }
 }
